@@ -1,0 +1,5 @@
+ConfigFramework~=2.0.8
+SqlAlchemy~=1.4.9
+discord.py~=1.7.1
+asyncpg~=0.22.0
+aiosqlite~=0.17.0
