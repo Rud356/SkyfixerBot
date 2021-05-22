@@ -16,5 +16,7 @@
   "hiding_birthday_mode": "Your are $showing_or_hiding your birthday",
   "invali_birthday_date": "You've provided invalid date. Correct format is \"%d.%m.%Y\"",
   "birthday_is_set": "Your birthday was set to $birthday",
-  "time_traveller_detected": "How did you got here..? Why? Are we in danger?"
+  "time_traveller_detected": "How did you got here..? Why? Are we in danger?",
+  "users_level": "$member_mention got ${level} level",
+  "users_exp": "$member_mention got ${level} exp"
 }

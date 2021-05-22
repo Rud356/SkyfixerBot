@@ -56,6 +56,7 @@ class ServerMember(Base):
             server = await Server.get_or_create(server_id, session=session)
             server_member = ServerMember(user=user, server=server)  # noqa: this should work ewfweeing to the docs
             session.add(server_member)
+            await session.commit()
 
         return server_member
 
