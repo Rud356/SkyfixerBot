@@ -64,10 +64,10 @@ class User(Base):
             raise PermissionError("Birthday is hidden")
 
         if self.hide_age:
-            return self.birthday.strftime("%d.%m (day, month)")
+            return self.birthday.strftime("%d/%m (day, month)")
 
         else:
-            return self.birthday.strftime("%d.%m.%Y (day, month, year)")
+            return self.birthday.strftime("%d/%m/%Y (day, month, year)")
 
     async def change_hiding_age(self, *, session: AsyncSession) -> None:
         self.hide_age = not self.hide_age
@@ -84,7 +84,7 @@ class User(Base):
             birthday_date = datetime(birthday_date.year, birthday_date.month, 28)
 
         if birthday_date > datetime.utcnow().date():
-            raise ValueError("No time travellers allowed!")
+            raise self.exc.NoTimeTravellersAllowed("No time travellers allowed!")
 
         self.birthday = birthday_date
         await session.commit()
@@ -113,3 +113,7 @@ class User(Base):
 
     def translate_phrase(self, key: str) -> Template:
         return translator.translate(key, self.language)
+
+    class exc:
+        class NoTimeTravellersAllowed(Exception):
+            pass

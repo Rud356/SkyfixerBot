@@ -12,6 +12,9 @@ class Language:
     __slots__ = ("language_name", "phrases")
 
     def __init__(self, language_name: AnyStr, phrases: Dict[AnyStr, AnyStr]):
+        if len(language_name) > 3:
+            raise ValueError(f"Too long language name: {language_name}")
+
         self.language_name = language_name
         self.phrases = {
             k: Template(v) for k, v in phrases.items()

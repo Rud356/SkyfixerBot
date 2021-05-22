@@ -32,6 +32,14 @@ class ServerMember(Base):
 
     @classmethod
     async def get_or_create(cls, user_id: int, server_id: int, *, session: AsyncSession) -> ServerMember:
+        """
+        Gets or creates server member.
+
+        :param user_id: member id.
+        :param server_id: server id where we look up user.
+        :param session: sqlalchemy session.
+        :return: server member instance.
+        """
         server_member_query = select(ServerMember).filter(
             and_(
                 ServerMember.member_id == user_id,
@@ -52,10 +60,23 @@ class ServerMember(Base):
         return server_member
 
     async def add_exp_amount(self, amount: int, *, session: AsyncSession) -> None:
+        """
+        Gives some exp to user.
+
+        :param amount: how much exp to give this user.
+        :param session: sqlalchemy session.
+        :return: nothing.
+        """
         self.exp += amount
         await session.commit()
 
     async def increase_exp(self, *, session: AsyncSession) -> None:
+        """
+        Increases exp for message.
+
+        :param session: sqlalchemy session.
+        :return: nothing
+        """
         exp_amount = randint(15, 25) * ceil(sqrt(self.level))
 
         if self.exp + exp_amount >= self.next_level_requirement(self.level):
@@ -64,14 +85,34 @@ class ServerMember(Base):
         await session.commit()
 
     async def ban(self, *, session: AsyncSession) -> None:
+        """
+        Increases bans count for this user.
+
+        :param session: sqlalchemy session.
+        :return: nothing
+        """
         self.ban_counter += 1
         await session.commit()
 
     async def kick(self, *, session: AsyncSession) -> None:
+        """
+        Increases kick count for user.
+
+        :param session: sqlalchemy session.
+        :return: nothing
+        """
         self.kick_counter += 1
         await session.commit()
 
     @staticmethod
     @lru_cache(None)
     def next_level_requirement(level: int) -> int:
-        return round(100 * round(sqrt(level + 1), 2))
+        """
+        Calculates how much exp is required for next level
+
+        :param level: for what level we calculate exp for.
+        :return: amount of exp required to achieve this level.
+        """
+        return round(
+            100 * (round(sqrt(level + 1), 2) + level)
+        )
