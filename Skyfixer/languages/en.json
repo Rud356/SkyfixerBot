@@ -39,5 +39,6 @@
   "facts_about_me_title": "Some facts about me",
   "facts_about_me": "1) I am girl\n2) I like playing games and watch anime\n3) I like being chaos and order at the same time\n4) My name is `$bots_name` and you can find me via $bot_mention\n5) My current version of OS is $version\n6) I love purple color",
   "about_author_title": "Here's some things about my father",
-  "about_author": "[Rud356](https://github.com/Rud356):\nI like when people use my projects the way they've been meant to be used so please, if you got a bug or wish to add something - make sure to tell it to me."
+  "about_author": "[Rud356](https://github.com/Rud356):\nI like when people use my projects the way they've been meant to be used so please, if you got a bug or wish to add something - make sure to tell it to me.",
+  "no_command_found": "No such command found"
 }

@@ -81,7 +81,7 @@ class UserSettingsCommands(Cog, name="User settings commands"):
         await ctx.send(text)
 
     @command()
-    @commands.check(commands.dm_only())
+    @commands.dm_only()
     async def set_birthday(self, ctx: SkyfixerContext, birthday_date: str):
         """
         Sets your birthday (works only in dms)
@@ -105,7 +105,12 @@ class UserSettingsCommands(Cog, name="User settings commands"):
 
     @set_birthday.error
     async def handle_set_birthday_errors(self, ctx: SkyfixerContext, error):
-        if isinstance(error, commands.BadArgument) or isinstance(error, commands.TooManyArguments):
+        if any(
+                (
+                    isinstance(error, commands.BadArgument), isinstance(error, commands.TooManyArguments),
+                    isinstance(error, commands.MissingRequiredArgument)
+                )
+        ):
             msg = ctx.db_author.translate_phrase("no_birthday_provided").safe_substitute()
             await ctx.send(msg, delete_after=10)
             await ctx.message.delete(delay=5)

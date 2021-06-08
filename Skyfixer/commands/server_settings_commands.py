@@ -13,23 +13,6 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     def __init__(self, bot=skyfixer_bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_command_error(self, ctx: SkyfixerContext, error, ignore_error_handler=False):
-        if ctx.command.has_error_handler() and not ignore_error_handler:
-            return
-
-        if isinstance(error, commands.NoPrivateMessage):
-            msg = ctx.db_author.translate_phrase("only_for_servers").safe_substitute()
-            await ctx.send(msg)
-
-        if isinstance(error, commands.CheckAnyFailure) or isinstance(error, commands.NotOwner):
-            msg = ctx.db_author.translate_phrase("no_permissions").safe_substitute()
-            await ctx.send(msg)
-
-        logger.exception(error)
-        msg = ctx.db_author.translate_phrase("something_gone_wrong").safe_substitute()
-        await ctx.send(msg)
-
     @command()
     @commands.check(commands.guild_only())
     @commands.check_any(
