@@ -38,7 +38,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     )
     async def set_prefix(self, ctx: SkyfixerContext, prefix: str):
         """
-        Sets prefix for server.
+        Sets prefix for server
         Prefix must match regex: ^([a-zA-Z!\\-+=?|$#]){1,2}$
         """
         try:
@@ -68,7 +68,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     )
     async def set_welcome_channel(self, ctx: SkyfixerContext):
         """
-        Sets current channel as welcome channel for server.
+        Sets current channel as welcome channel
         Welcome channel will be used to greet new users
         """
         await ctx.db_server.set_welcome_channel(
@@ -88,7 +88,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     )
     async def unset_welcome_channel(self, ctx: SkyfixerContext):
         """
-        Stops sending messages to former welcome channel of server.
+        Stops sending messages to current welcome channel
         """
         await ctx.db_server.set_welcome_channel(
             None, session=ctx.session
@@ -105,7 +105,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     )
     async def set_announcement_channel(self, ctx: SkyfixerContext):
         """
-        Sets current channel as announcements channel for server.
+        Sets current channel as announcements
         Announcements channel will be used to send announcements via specific commands
         """
         await ctx.db_server.set_announcements_channel(
@@ -125,7 +125,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     )
     async def unset_announcement_channel(self, ctx: SkyfixerContext):
         """
-        Stops sending messages to former announcement channel of server.
+        Stops sending messages to current announcement channel
         """
         await ctx.db_server.set_announcements_channel(
             None, session=ctx.session
@@ -142,7 +142,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     )
     async def set_moderation_log_channel(self, ctx: SkyfixerContext):
         """
-        Sets current channel as moderation log channel for server.
+        Sets current channel as moderation log
         Moderation log channel will be used to send messages about bans, kicks and other notifications
         """
         await ctx.db_server.set_moderation_log_channel(
@@ -162,7 +162,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
     )
     async def unset_moderation_log_channel(self, ctx: SkyfixerContext):
         """
-        Stops sending messages to former moderation log channel of server.
+        Stops sending messages to current moderation log channel
         """
         await ctx.db_server.set_moderation_log_channel(
             None, session=ctx.session

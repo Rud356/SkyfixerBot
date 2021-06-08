@@ -54,7 +54,7 @@ class SimpleCommands(Cog, name="Simple commands"):
 
     @command(aliases=("utcnow", "now"))
     async def time(self, ctx: SkyfixerContext):
-        """Tells what time is in 0 timezone.
+        """Tells what time is in 0 timezone
         Format: %m/%d/%Y # %H:%M.%S
         """
         text = ctx.db_author.translate_phrase("current_time").safe_substitute(
@@ -70,7 +70,10 @@ class SimpleCommands(Cog, name="Simple commands"):
 
     @command()
     async def ship(self, ctx: SkyfixerContext):
-        """Ships two mentioned users or two words sequence separated by +"""
+        """
+        Ships two things (see full help)
+        Mentioned users or two words sequence separated by + will be shipped
+        """
         cmd_len = len(ctx.prefix) + len(ctx.invoked_with)
         clear_content = ctx.message.content[cmd_len:]
 

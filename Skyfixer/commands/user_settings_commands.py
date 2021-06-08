@@ -16,7 +16,8 @@ class UserSettingsCommands(Cog, name="User settings commands"):
     @command()
     async def set_language(self, ctx: SkyfixerContext, language: str):
         """
-        Sets new default language for user that will be used in commands text, invoked by him.
+        Sets new default language
+        New language will be used in commands text, invoked by you
         """
         try:
             await ctx.db_author.set_language(language, session=ctx.session)
@@ -44,7 +45,7 @@ class UserSettingsCommands(Cog, name="User settings commands"):
 
     @command()
     async def language_list(self, ctx: SkyfixerContext):
-        """Shows all available languages."""
+        """Shows all available languages"""
         languages_names = list(translator.languages.keys())
         languages_names.append(translator.reference_language.language_name)
 
@@ -61,7 +62,7 @@ class UserSettingsCommands(Cog, name="User settings commands"):
 
     @command()
     async def change_hiding_age(self, ctx: SkyfixerContext):
-        """Switches flag that tells if your birthday should be shown or not."""
+        """Changes if you want to show age or not"""
         await ctx.db_author.change_hiding_age(session=ctx.session)
         showing_or_hiding_age = "hiding" if ctx.db_author.hide_age else "showing"
         text = ctx.db_author.translate_phrase("hiding_age_mode").safe_substitute(
@@ -71,7 +72,7 @@ class UserSettingsCommands(Cog, name="User settings commands"):
 
     @command()
     async def change_hiding_age(self, ctx: SkyfixerContext):
-        """Switches flag that tells if your age should be shown or not."""
+        """Switches flag that tells if your age should be shown or not"""
         await ctx.db_author.change_hiding_age(session=ctx.session)
         showing_or_hiding_birthday = "hiding" if ctx.db_author.hide_age else "showing"
         text = ctx.db_author.translate_phrase("hiding_birthday_mode").safe_substitute(
@@ -83,7 +84,9 @@ class UserSettingsCommands(Cog, name="User settings commands"):
     @commands.check(commands.dm_only())
     async def set_birthday(self, ctx: SkyfixerContext, birthday_date: str):
         """
-        Sets your birthday date by providing birthday date as %d.%m.%Y (day.month.year as numbers).
+        Sets your birthday (works only in dms)
+
+        Date providing birthday date as %d.%m.%Y (day.month.year as numbers)
         Example: {prefix}set_birthday 19.07.1998
         """
         try:
