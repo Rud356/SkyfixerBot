@@ -8,14 +8,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from Skyfixer.config import skyfixer_config, validators
 from Skyfixer.models.sqlalchemy_objects import Base
 
+DEFAULT_MAX_GREETINGS = 10
+
 
 class Server(Base):
     id = Column(BigInteger, primary_key=True, autoincrement=False)
     prefix = Column(String(3), default=skyfixer_config.default_prefix.value)
 
-    announcements_channel_id = Column(BigInteger, autoincrement=False)
-    moderation_channel_id = Column(BigInteger, autoincrement=False)
-    welcome_channel_id = Column(BigInteger, autoincrement=False)
+    announcements_channel_id = Column(BigInteger, autoincrement=False, nullable=True)
+    moderation_channel_id = Column(BigInteger, autoincrement=False, nullable=True)
+    welcome_channel_id = Column(BigInteger, autoincrement=False, nullable=True)
 
     __tablename__ = "servers"
 
@@ -104,3 +106,7 @@ class Server(Base):
         """
         self.welcome_channel_id = channel_id
         await session.commit()
+
+    @property
+    def greetings_limit(self):
+        return DEFAULT_MAX_GREETINGS

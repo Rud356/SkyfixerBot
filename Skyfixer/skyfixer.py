@@ -10,10 +10,10 @@ from Skyfixer.models.sqlalchemy_objects import init_db
 
 
 class SkyfixerBot(AutoShardedBot):
-    first_run = True
+    __version__ = "2.0.0"
     default_activity = discord.Activity(
         name="I'm listening to you my friend!~",
-        type=discord.ActivityType.listening
+        type=discord.ActivityType.custom
     )
 
     @staticmethod
@@ -48,10 +48,6 @@ skyfixer_bot = SkyfixerBot(
 
 @skyfixer_bot.event
 async def on_ready():
-    if skyfixer_bot.first_run:
-        await init_db()
-        skyfixer_bot.first_run = False
-
     print(
         "Logged in as",
         f"Name: {skyfixer_bot.user.name}",

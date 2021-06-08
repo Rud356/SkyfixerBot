@@ -1,12 +1,14 @@
+from discord.ext import commands
 from discord.ext.commands import Cog, command
 from sqlalchemy.exc import IntegrityError
 
+from Skyfixer.config import skyfixer_logs_config
 from Skyfixer.extended_discord_classes import SkyfixerContext
 from Skyfixer.localisation import translator
 from Skyfixer.skyfixer import skyfixer_bot
 
 
-class UserSettingsCommands(Cog):
+class UserSettingsCommands(Cog, name="User settings commands"):
     """Commands for changing users settings"""
     def __init__(self, bot=skyfixer_bot):
         self.bot = bot
@@ -27,6 +29,18 @@ class UserSettingsCommands(Cog):
             text = ctx.db_author.translate_phrase("invalid_language").safe_substitute()
 
         await ctx.send(text)
+
+    @set_language.error
+    async def handle_set_language_errors(self, ctx: SkyfixerContext, error):
+        if isinstance(error, commands.BadArgument) or isinstance(error, commands.TooManyArguments):
+            msg = ctx.db_author.translate_phrase("no_language_provided").safe_substitute()
+            await ctx.send(msg, delete_after=10)
+            await ctx.message.delete(delay=5)
+
+        else:
+            skyfixer_logs_config.logger.exception(error)
+            msg = ctx.db_author.translate_phrase("something_gone_wrong").safe_substitute()
+            await ctx.send(msg)
 
     @command()
     async def language_list(self, ctx: SkyfixerContext):
@@ -66,6 +80,7 @@ class UserSettingsCommands(Cog):
         await ctx.send(text)
 
     @command()
+    @commands.check(commands.dm_only())
     async def set_birthday(self, ctx: SkyfixerContext, birthday_date: str):
         """
         Sets your birthday date by providing birthday date as %d.%m.%Y (day.month.year as numbers).
@@ -84,3 +99,18 @@ class UserSettingsCommands(Cog):
             text = ctx.db_author.translate_phrase("birthday_is_set").safe_substitute(birthday=birthday_date)
 
         await ctx.send(text)
+
+    @set_birthday.error
+    async def handle_set_birthday_errors(self, ctx: SkyfixerContext, error):
+        if isinstance(error, commands.BadArgument) or isinstance(error, commands.TooManyArguments):
+            msg = ctx.db_author.translate_phrase("no_birthday_provided").safe_substitute()
+            await ctx.send(msg, delete_after=10)
+            await ctx.message.delete(delay=5)
+
+        elif isinstance(error, commands.PrivateMessageOnly):
+            await ctx.message.delete()
+
+        else:
+            skyfixer_logs_config.logger.exception(error)
+            msg = ctx.db_author.translate_phrase("birthday_can_be_set_only_in_dms").safe_substitute()
+            await ctx.send(msg)

@@ -12,7 +12,7 @@ from Skyfixer.models.sqlalchemy_objects import Base
 
 class User(Base):
     id = Column(BigInteger, primary_key=True)
-    language = Column(String(3), default='en')
+    language = Column(String(20), default='en')
 
     coins = Column(BigInteger, default=1000)
     birthday = Column(Date, nullable=True)

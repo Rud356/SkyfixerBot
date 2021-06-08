@@ -7,7 +7,7 @@ from Skyfixer.extended_discord_classes import SkyfixerContext
 from Skyfixer.skyfixer import skyfixer_bot
 
 
-class SimpleCommands(Cog):
+class SimpleCommands(Cog, name="Simple commands"):
     """
     Bunch of simple commands.
     """
