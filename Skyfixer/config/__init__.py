@@ -15,14 +15,18 @@ from sqlalchemy.pool import AsyncAdaptedQueuePool
 from Skyfixer.config import validators
 from .defaults import defaults
 
-parser = ArgumentParser()
+parser = ArgumentParser(argument_default={
+    "config_path": Path(__file__).parent / "config.json",
+    "create_config": False
+})
 parser.add_argument(
     "--config", "-c", action="store", dest="config_path",
     default=Path(__file__).parent / "config.json", type=Path
 )
 parser.add_argument("--make-config", "--new-config", action="store_true", dest="create_config", default=False)
 
-launch_args = parser.parse_args()
+
+launch_args, unknown = parser.parse_known_args()
 if not launch_args.config_path.is_file() and not launch_args.create_config:
     raise ValueError("[--config] launch argument accepts path to config file only")
 
