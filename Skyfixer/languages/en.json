@@ -22,6 +22,7 @@
   "updated_prefix": "You've updated a prefix to $new_prefix",
   "invalid_prefix_set": "You've tried to set invalid prefix, try again :^(",
   "only_for_servers": "This command can only be used in servers, sorry",
+  "only_for_servers_and_dms": "This command can only be used in servers or dms, sorry",
   "no_permissions": "You can not do that, sorry skyfixer... One day you'll be likely able to do that!",
   "no_prefix_provided": "You didn't provided any prefix or supplied too many arguments",
   "no_language_provided": "You didn't supplied any language or gave too many arguments",
@@ -40,5 +41,18 @@
   "facts_about_me": "1) I am girl\n2) I like playing games and watch anime\n3) I like being chaos and order at the same time\n4) My name is `$bots_name` and you can find me via $bot_mention\n5) My current version of OS is $version\n6) I love purple color",
   "about_author_title": "Here's some things about my father",
   "about_author": "[Rud356](https://github.com/Rud356):\nI like when people use my projects the way they've been meant to be used so please, if you got a bug or wish to add something - make sure to tell it to me.",
-  "no_command_found": "No such command found"
+  "user_info_in_pm_title": "Information and settings about you",
+  "user_in_server_title": "Information about $user_mention",
+  "basic_info_title": "Basic information",
+  "user_info_for_embed": "User name: $username\nDev ID: $user_id\nCoins: $coins_amount\nCreated at: $user_created_at\nLanguage: $user_language",
+  "users_avatar_info_title": "About avatar",
+  "user_avatar_info": "Avatar url: $avatar_url\nAvatar is animated: $is_avatar_animated",
+  "user_birthday_info_title": "About birthday and age",
+  "user_birthday_info": "Birthday date: $birthday_date\nAge: $users_age",
+  "birthday_unknown": "users birthday date is unknown",
+  "age_is_unknown": "users age is unknown",
+  "users_settings_title": "Your settings",
+  "users_settings": "Hiding age: $is_hiding_age\nHiding birthday: $is_hiding_birthday",
+  "users_server_related_title": "Server related information",
+  "users_server_related_info": "Server: $server_info\nJoined at: $joined_at\nExp: $exp_amount\nLevel: $level\nBans count: $bans_count\nKicks count: $kicks_count\n"
 }

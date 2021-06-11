@@ -1,13 +1,13 @@
 from datetime import datetime
 from random import choice, randint
 
-from discord.ext.commands import Cog, command
+from discord.ext.commands import command
 
-from Skyfixer.extended_discord_classes import SkyfixerContext
+from Skyfixer.extended_discord_classes import SkyfixerCog, SkyfixerContext
 from Skyfixer.skyfixer import skyfixer_bot
 
 
-class SimpleCommands(Cog, name="Simple commands"):
+class SimpleCommands(SkyfixerCog, name="Simple commands"):
     """
     Bunch of simple commands.
     """
@@ -95,3 +95,7 @@ class SimpleCommands(Cog, name="Simple commands"):
             shipping=shipping, shipping_with=shipping_with, percent=percent
         )
         await ctx.send(text)
+
+    @command()
+    async def err(self, ctx):
+        raise ValueError()

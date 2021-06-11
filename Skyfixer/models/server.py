@@ -66,7 +66,7 @@ class Server(Base):
         :param session: sqlalchemy session.
         :return: nothing.
         """
-        is_valid, prefix = validators.validate_prefix(prefix)
+        is_valid = validators.validate_prefix(prefix)
 
         if not is_valid:
             raise ValueError("Invalid prefix")

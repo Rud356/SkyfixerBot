@@ -1,14 +1,14 @@
 from discord.ext import commands
-from discord.ext.commands import Cog, command
+from discord.ext.commands import command
 from sqlalchemy.exc import IntegrityError
 
 from Skyfixer.config import skyfixer_logs_config
-from Skyfixer.extended_discord_classes import SkyfixerContext
+from Skyfixer.extended_discord_classes import SkyfixerCog, SkyfixerContext
 from Skyfixer.localisation import translator
 from Skyfixer.skyfixer import skyfixer_bot
 
 
-class UserSettingsCommands(Cog, name="User settings commands"):
+class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
     """Commands for changing users settings"""
     def __init__(self, bot=skyfixer_bot):
         self.bot = bot

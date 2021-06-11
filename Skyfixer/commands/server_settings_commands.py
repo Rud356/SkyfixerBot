@@ -1,12 +1,11 @@
 from discord.ext import commands
-from discord.ext.commands import Cog, command
+from discord.ext.commands import command
 
-from Skyfixer.config import logger
-from Skyfixer.extended_discord_classes import SkyfixerContext
+from Skyfixer.extended_discord_classes import SkyfixerCog, SkyfixerContext
 from Skyfixer.skyfixer import skyfixer_bot
 
 
-class ServerSettingsCommands(Cog, name="Server settings commands"):
+class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
     """
     Commands to change server settings.
     """
@@ -41,7 +40,7 @@ class ServerSettingsCommands(Cog, name="Server settings commands"):
             await ctx.message.delete(delay=5)
 
         else:
-            await self.on_command_error(ctx, error, ignore_error_handler=True)
+            await self.cog_command_error(ctx, error, ignore_error_handler=True)
 
     @command()
     @commands.check(commands.guild_only())

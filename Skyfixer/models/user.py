@@ -51,6 +51,9 @@ class User(Base):
 
         :return: users age.
         """
+        if self.birthday is None:
+            raise ValueError("No birthday so can't tell age")
+
         return (datetime.utcnow().date() - self.birthday).days // 365
 
     @property
