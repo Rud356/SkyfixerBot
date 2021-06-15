@@ -18,6 +18,7 @@ class ServerMember(Base):
     server_id = Column(ForeignKey("servers.id"), index=True, nullable=False)
     exp = Column(BigInteger, default=0)
     level = Column(Integer, default=1)
+    coins = Column(BigInteger, default=1000)
     ban_counter = Column(Integer, default=0)
     kick_counter = Column(Integer, default=0)
 
@@ -83,6 +84,25 @@ class ServerMember(Base):
         if self.exp + exp_amount >= self.next_level_requirement(self.level):
             self.level += 1
 
+        await session.commit()
+
+    async def add_coins_amount(self, amount: int, *, session: AsyncSession) -> None:
+        """
+        Adds amount of coins to user.
+
+        :param amount: how many
+        :param session:
+        :return:
+        """
+        self.coins += amount
+        await session.commit()
+
+    async def transfer_coins(self, amount: int, to_user: User, *, session: AsyncSession) -> None:
+        if self.coins < amount or amount < 0:
+            raise ValueError("Insufficient coins amount on account")
+
+        self.coins -= amount
+        to_user.coins += amount
         await session.commit()
 
     async def ban(self, *, session: AsyncSession) -> None:

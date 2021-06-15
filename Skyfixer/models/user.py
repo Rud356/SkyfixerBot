@@ -73,14 +73,33 @@ class User(Base):
             return self.birthday.strftime("%d/%m/%Y (day, month, year)")
 
     async def change_hiding_age(self, *, session: AsyncSession) -> None:
+        """
+        Switches if user wants to hide his age or not.
+
+        :param session: sqlalchemy session.
+        :return: nothing.
+        """
         self.hide_age = not self.hide_age
         await session.commit()
 
     async def change_hiding_birthday(self, *, session: AsyncSession) -> None:
+        """
+        Switches if user wants to hide his birthday or not.
+
+        :param session: sqlalchemy session.
+        :return: nothing.
+        """
         self.hide_birthday = not self.hide_birthday
         await session.commit()
 
     async def set_birthday(self, birthday: str, *, session: AsyncSession) -> None:
+        """
+        Sets birthday of user from birthday date string.
+
+        :param birthday: birthday as a string.
+        :param session: sqlalchemy session.
+        :return: nothing.
+        """
         birthday_date = datetime.strptime(birthday, "%d.%m.%Y").date()
 
         if birthday_date.month == 5 and birthday_date.day > 28:
@@ -92,22 +111,14 @@ class User(Base):
         self.birthday = birthday_date
         await session.commit()
 
-    async def add_coins_amount(self, amount: int, *, session: AsyncSession) -> None:
-        if self.coins < amount:
-            raise ValueError("Insufficient coins amount on account")
-
-        self.coins += amount
-        await session.commit()
-
-    async def transfer_coins(self, amount: int, to_user: User, *, session: AsyncSession) -> None:
-        if self.coins < amount or amount < 0:
-            raise ValueError("Insufficient coins amount on account")
-
-        self.coins -= amount
-        to_user.coins += amount
-        await session.commit()
-
     async def set_language(self, new_language: str, *, session: AsyncSession) -> None:
+        """
+        Applies new default language to user.
+
+        :param new_language: language name string.
+        :param session: sqlalchemy session.
+        :return: nothing.
+        """
         if new_language not in translator.languages:
             raise ValueError("Invalid language")
 

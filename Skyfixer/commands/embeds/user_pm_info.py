@@ -23,7 +23,6 @@ def user_pm_info(user: User, user_from_db: DBUser) -> Embed:
     about_user = user_from_db.translate_phrase("user_info_for_embed").safe_substitute(
         username=user.name,
         user_id=user.id,
-        coins_amount=user_from_db.coins,
         user_created_at=created_at,
         user_language=user_from_db.language
     )

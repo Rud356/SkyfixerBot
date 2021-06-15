@@ -44,7 +44,7 @@
   "user_info_in_pm_title": "Information and settings about you",
   "user_in_server_title": "Information about $user_mention",
   "basic_info_title": "Basic information",
-  "user_info_for_embed": "User name: $username\nDev ID: $user_id\nCoins: $coins_amount\nCreated at: $user_created_at\nLanguage: $user_language",
+  "user_info_for_embed": "User name: $username\nDev ID: $user_id\nCreated at: $user_created_at\nLanguage: $user_language",
   "users_avatar_info_title": "About avatar",
   "user_avatar_info": "Avatar url: $avatar_url\nAvatar is animated: $is_avatar_animated",
   "user_birthday_info_title": "About birthday and age",
