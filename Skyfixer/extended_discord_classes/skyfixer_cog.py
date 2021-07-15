@@ -17,7 +17,7 @@ class SkyfixerCog(Cog):
             return
 
         if isinstance(error, commands.NoPrivateMessage):
-            msg = ctx.db_author.translate_phrase("only_for_servers").safe_substitute()
+            msg = ctx.translate("only_for_servers").safe_substitute()
             await ctx.send(msg)
             return
 
@@ -26,11 +26,11 @@ class SkyfixerCog(Cog):
                 isinstance(error, commands.NotOwner) or
                 isinstance(error, commands.BotMissingPermissions)
         ):
-            msg = ctx.db_author.translate_phrase("no_permissions").safe_substitute()
+            msg = ctx.translate("no_permissions").safe_substitute()
             await ctx.send(msg)
             return
 
         if not isinstance(error, commands.CommandNotFound):
             logger.exception(error)
-            msg = ctx.db_author.translate_phrase("something_gone_wrong").safe_substitute()
+            msg = ctx.translate("something_gone_wrong").safe_substitute()
             await ctx.send(msg)

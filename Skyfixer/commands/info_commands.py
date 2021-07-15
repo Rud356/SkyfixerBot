@@ -26,7 +26,7 @@ class InfoCommands(SkyfixerCog, name="Information commands"):
             server_member_user = ctx.author
             server_member = ctx.db_server_member
 
-        text = ctx.db_author.translate_phrase("users_level").safe_substitute(
+        text = ctx.translate("users_level").safe_substitute(
             member_mention=server_member_user.mention, level=server_member.level
         )
         await ctx.send(text)
@@ -45,7 +45,7 @@ class InfoCommands(SkyfixerCog, name="Information commands"):
             server_member_user = ctx.author
             server_member = ctx.db_server_member
 
-        text = ctx.db_author.translate_phrase("users_exp").safe_substitute(
+        text = ctx.translate("users_exp").safe_substitute(
             member_mention=server_member_user.mention, level=server_member.exp
         )
         await ctx.send(text)
@@ -75,7 +75,7 @@ class InfoCommands(SkyfixerCog, name="Information commands"):
 
         else:
             await ctx.send(
-                ctx.db_author.translate_phrase("only_for_servers_and_dms").safe_substitute()
+                ctx.translate("only_for_servers_and_dms").safe_substitute()
             )
 
     @command()
