@@ -1,12 +1,16 @@
 from __future__ import annotations
 
+from string import Template
 from typing import Optional
 
 from sqlalchemy import BigInteger, Column, String, exc, select
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from Skyfixer.config import skyfixer_config, validators
-from Skyfixer.models.sqlalchemy_objects import Base
+from Skyfixer.localisation import translator
+from .sqlalchemy_objects import Base
+from .server_settings import ServerSettings
 
 DEFAULT_MAX_GREETINGS = 10
 
@@ -17,7 +21,9 @@ class Server(Base):
 
     announcements_channel_id = Column(BigInteger, autoincrement=False, nullable=True)
     moderation_channel_id = Column(BigInteger, autoincrement=False, nullable=True)
-    welcome_channel_id = Column(BigInteger, autoincrement=False, nullable=True)
+    welcome_channel_id = Column(BigInteger, autoincrement=False, nullable=True)\
+
+    settings: ServerSettings = relationship(ServerSettings, lazy="joined", uselist=False)
 
     __tablename__ = "servers"
 
@@ -37,7 +43,7 @@ class Server(Base):
             server: Server = query_result.scalar_one()
 
         except exc.NoResultFound:
-            server = Server(id=server_id)
+            server = Server(id=server_id, settings=ServerSettings())
             session.add(server)
             await session.commit()
 
@@ -106,6 +112,23 @@ class Server(Base):
         """
         self.welcome_channel_id = channel_id
         await session.commit()
+
+    async def set_language(self, new_language: str, *, session: AsyncSession) -> None:
+        """
+        Applies new default language to server.
+
+        :param new_language: language name string.
+        :param session: sqlalchemy session.
+        :return: nothing.
+        """
+        if new_language not in translator.languages:
+            raise ValueError("Invalid language")
+
+        self.settings.server_language = new_language
+        await session.commit()
+
+    def translate_phrase(self, key: str) -> Template:
+        return translator.translate(key, self.settings.server_language)
 
     @property
     def greetings_limit(self):

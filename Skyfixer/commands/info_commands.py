@@ -1,11 +1,10 @@
 from discord.ext import commands
-from discord.ext.commands import Cog, command
+from discord.ext.commands import command
 
-from Skyfixer.extended_discord_classes import SkyfixerContext
+from Skyfixer.extended_discord_classes import SkyfixerCog, SkyfixerContext
 from Skyfixer.models import ServerMember
 from Skyfixer.skyfixer import skyfixer_bot
-from Skyfixer.extended_discord_classes import SkyfixerCog
-from .embeds import about_skyfixer, user_pm_info, about_user_info
+from .embeds import about_skyfixer, about_user_info, user_pm_info
 
 
 class InfoCommands(SkyfixerCog, name="Information commands"):
@@ -53,6 +52,7 @@ class InfoCommands(SkyfixerCog, name="Information commands"):
 
     @command()
     async def about_user(self, ctx: SkyfixerContext):
+        """Shows information about some user"""
         if ctx.is_dm:
             await ctx.send(embed=user_pm_info.user_pm_info(ctx.author, ctx.db_author))
 

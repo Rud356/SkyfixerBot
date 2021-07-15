@@ -1,4 +1,3 @@
-from Skyfixer.skyfixer import skyfixer_bot
 from Skyfixer.commands import *
 from Skyfixer.config import skyfixer_config
 

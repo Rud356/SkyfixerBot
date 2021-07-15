@@ -54,5 +54,10 @@
   "users_settings_title": "Your settings",
   "users_settings": "Hiding age: $is_hiding_age\nHiding birthday: $is_hiding_birthday",
   "users_server_related_title": "Server related information",
-  "users_server_related_info": "Server: $server_info\nJoined at: $joined_at\nExp: $exp_amount\nLevel: $level\nBans count: $bans_count\nKicks count: $kicks_count\n"
+  "users_server_related_info": "Server: $server_info\nJoined at: $joined_at\nExp: $exp_amount\nLevel: $level\nBans count: $bans_count\nKicks count: $kicks_count\n",
+  "default_ban_reason": "$user_who_bans has banned $user_who_is_banned without providing reason",
+  "default_kick_reason": "$user_who_kicks has kicked $user_who_is_banned without providing reason",
+  "ban_reason": "$user_who_kicks has banned $user_who_is_banned: $reason",
+  "kick_reason": "$user_who_kicks has kicked $user_who_is_kicked: $reason",
+  "no_text_to_reverse": "No text given to reverse"
 }

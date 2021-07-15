@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from Skyfixer.config import skyfixer_config
 from Skyfixer.extended_discord_classes import SkyfixerContext
 from Skyfixer.models import Server, Session
-from Skyfixer.models.sqlalchemy_objects import init_db
 
 
 class SkyfixerBot(AutoShardedBot):

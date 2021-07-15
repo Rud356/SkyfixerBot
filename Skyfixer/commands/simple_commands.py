@@ -1,6 +1,7 @@
 from datetime import datetime
 from random import choice, randint
 
+from discord import Message
 from discord.ext.commands import command
 
 from Skyfixer.extended_discord_classes import SkyfixerCog, SkyfixerContext
@@ -32,7 +33,7 @@ class SimpleCommands(SkyfixerCog, name="Simple commands"):
 
     @command()
     async def coin(self, ctx: SkyfixerContext):
-        """Flips a coin for you."""
+        """Flips a coin for you"""
         side = choice(("heads", "tails"))
         translate_side = ctx.db_author.translate_phrase(f"coin_side_{side}").safe_substitute()
         text = ctx.db_author.translate_phrase("coin_flip").safe_substitute(side=translate_side)
@@ -96,6 +97,21 @@ class SimpleCommands(SkyfixerCog, name="Simple commands"):
         )
         await ctx.send(text)
 
-    @command()
-    async def err(self, ctx):
-        raise ValueError()
+    @command(aliases=["reverse", "minecraft_enchantment_table"])
+    async def reverse_text(self, ctx: SkyfixerContext):
+        """Reverses given text after command or from reply"""
+        message: Message = ctx.message
+
+        if message.reference is not None:
+            referenced_message = await ctx.fetch_message(message.reference.message_id)
+            await referenced_message.reply(content=referenced_message.clean_content[::-1])
+
+        else:
+            message_text: str = message.clean_content  # noqa: this returns
+            command_text, _, text = message_text.partition(' ')
+
+            if not text:
+                await message.reply(ctx.translate("no_text_to_reverse").safe_substitute())
+                return
+
+            await message.reply(content=text[::-1])
