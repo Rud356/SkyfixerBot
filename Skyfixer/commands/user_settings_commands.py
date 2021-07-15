@@ -21,26 +21,26 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
         """
         try:
             await ctx.db_author.set_language(language, session=ctx.session)
-            text = ctx.db_author.translate_phrase("new_language_set_successfully").safe_substitute(
+            text = ctx.translate("new_language_set_successfully").safe_substitute(
                 language=language
             )
 
         except (ValueError, IntegrityError):
             await ctx.session.rollback()
-            text = ctx.db_author.translate_phrase("invalid_language").safe_substitute()
+            text = ctx.translate("invalid_language").safe_substitute()
 
         await ctx.send(text)
 
     @set_language.error
     async def handle_set_language_errors(self, ctx: SkyfixerContext, error):
         if isinstance(error, commands.BadArgument) or isinstance(error, commands.TooManyArguments):
-            msg = ctx.db_author.translate_phrase("no_language_provided").safe_substitute()
+            msg = ctx.translate("no_language_provided").safe_substitute()
             await ctx.send(msg, delete_after=10)
             await ctx.message.delete(delay=5)
 
         else:
             skyfixer_logs_config.logger.exception(error)
-            msg = ctx.db_author.translate_phrase("something_gone_wrong").safe_substitute()
+            msg = ctx.translate("something_gone_wrong").safe_substitute()
             await ctx.send(msg)
 
     @command()
@@ -57,7 +57,7 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
             languages_lines_array.append(_)
 
         languages_string = ",\n".join(languages_lines_array)
-        text = ctx.db_author.translate_phrase("language_list").safe_substitute(languages=languages_string)
+        text = ctx.translate("language_list").safe_substitute(languages=languages_string)
         await ctx.send(text)
 
     @command()
@@ -65,7 +65,7 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
         """Changes if you want to show age or not"""
         await ctx.db_author.change_hiding_age(session=ctx.session)
         showing_or_hiding_age = "hiding" if ctx.db_author.hide_age else "showing"
-        text = ctx.db_author.translate_phrase("hiding_age_mode").safe_substitute(
+        text = ctx.translate("hiding_age_mode").safe_substitute(
             showing_or_hiding=showing_or_hiding_age
         )
         await ctx.send(text)
@@ -75,7 +75,7 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
         """Switches flag that tells if your age should be shown or not"""
         await ctx.db_author.change_hiding_age(session=ctx.session)
         showing_or_hiding_birthday = "hiding" if ctx.db_author.hide_age else "showing"
-        text = ctx.db_author.translate_phrase("hiding_birthday_mode").safe_substitute(
+        text = ctx.translate("hiding_birthday_mode").safe_substitute(
             showing_or_hiding=showing_or_hiding_birthday
         )
         await ctx.send(text)
@@ -93,13 +93,13 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
             await ctx.db_author.set_birthday(birthday_date, session=ctx.session)
 
         except ValueError:
-            text = ctx.db_author.translate_phrase("invali_birthday_date").safe_substitute()
+            text = ctx.translate("invali_birthday_date").safe_substitute()
 
         except ctx.db_author.exc.NoTimeTravellersAllowed:
-            text = ctx.db_author.translate_phrase("time_traveller_detected").safe_substitute()
+            text = ctx.translate("time_traveller_detected").safe_substitute()
 
         else:
-            text = ctx.db_author.translate_phrase("birthday_is_set").safe_substitute(birthday=birthday_date)
+            text = ctx.translate("birthday_is_set").safe_substitute(birthday=birthday_date)
 
         await ctx.send(text)
 
@@ -111,7 +111,7 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
                     isinstance(error, commands.MissingRequiredArgument)
                 )
         ):
-            msg = ctx.db_author.translate_phrase("no_birthday_provided").safe_substitute()
+            msg = ctx.translate("no_birthday_provided").safe_substitute()
             await ctx.send(msg, delete_after=10)
             await ctx.message.delete(delay=5)
 
@@ -120,5 +120,5 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
 
         else:
             skyfixer_logs_config.logger.exception(error)
-            msg = ctx.db_author.translate_phrase("birthday_can_be_set_only_in_dms").safe_substitute()
+            msg = ctx.translate("birthday_can_be_set_only_in_dms").safe_substitute()
             await ctx.send(msg)

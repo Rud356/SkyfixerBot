@@ -20,7 +20,7 @@ class SimpleCommands(SkyfixerCog, name="Simple commands"):
         """
         Responds with pong on your message!
         """
-        text = ctx.db_author.translate_phrase("ping").safe_substitute()
+        text = ctx.translate("ping").safe_substitute()
         await ctx.reply(text)
 
     @command(aliases=("helloWorld", ))
@@ -28,29 +28,29 @@ class SimpleCommands(SkyfixerCog, name="Simple commands"):
         """
         Sends hello world in chat.
         """
-        text = ctx.db_author.translate_phrase("hello_world").safe_substitute()
+        text = ctx.translate("hello_world").safe_substitute()
         await ctx.send(text)
 
     @command()
     async def coin(self, ctx: SkyfixerContext):
         """Flips a coin for you"""
         side = choice(("heads", "tails"))
-        translate_side = ctx.db_author.translate_phrase(f"coin_side_{side}").safe_substitute()
-        text = ctx.db_author.translate_phrase("coin_flip").safe_substitute(side=translate_side)
+        translate_side = ctx.translate(f"coin_side_{side}").safe_substitute()
+        text = ctx.translate("coin_flip").safe_substitute(side=translate_side)
         await ctx.send(text)
 
     @command()
     async def pick(self, ctx: SkyfixerContext):
         """Picks one option from many, separated by ; (semi-colon)"""
         cmd_len = len(ctx.prefix) + len(ctx.invoked_with)
-        options = ctx.message.content[cmd_len:].split("; ")
+        options = ctx.message.content[cmd_len:].split(";")
 
         if len(options) < 2:
-            text = ctx.db_author.translate_phrase(f"not_enough_args").safe_substitute(num=2)
+            text = ctx.translate(f"not_enough_args").safe_substitute(num=2)
             await ctx.send(text)
             return
 
-        text = ctx.db_author.translate_phrase(f"bots_choice").safe_substitute(words=choice(options).strip())
+        text = ctx.translate(f"bots_choice").safe_substitute(words=choice(options).strip())
         await ctx.send(text)
 
     @command(aliases=("utcnow", "now"))
@@ -58,7 +58,7 @@ class SimpleCommands(SkyfixerCog, name="Simple commands"):
         """Tells what time is in 0 timezone
         Format: %m/%d/%Y # %H:%M.%S
         """
-        text = ctx.db_author.translate_phrase("current_time").safe_substitute(
+        text = ctx.translate("current_time").safe_substitute(
             datetime=datetime.utcnow().strftime("%m/%d/%Y # %H:%M.%S")
         )
         await ctx.send(text)
@@ -66,7 +66,7 @@ class SimpleCommands(SkyfixerCog, name="Simple commands"):
     @command()
     async def dice(self, ctx: SkyfixerContext):
         """Rolls a dice and gives you number on it!"""
-        text = ctx.db_author.translate_phrase("roll_the_dice").safe_substitute(num=randint(1, 6))
+        text = ctx.translate("roll_the_dice").safe_substitute(num=randint(1, 6))
         await ctx.send(text)
 
     @command()
@@ -87,12 +87,12 @@ class SimpleCommands(SkyfixerCog, name="Simple commands"):
             shipping = shipping.capitalize()
 
         else:
-            text = ctx.db_author.translate_phrase(f"not_enough_args").safe_substitute(num=2)
+            text = ctx.translate(f"not_enough_args").safe_substitute(num=2)
             await ctx.send(text)
             return
 
         percent = randint(10, 1002) / 10
-        text = ctx.db_author.translate_phrase("shipping").safe_substitute(
+        text = ctx.translate("shipping").safe_substitute(
             shipping=shipping, shipping_with=shipping_with, percent=percent
         )
         await ctx.send(text)

@@ -25,17 +25,17 @@ class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
         """
         try:
             await ctx.db_server.set_prefix(prefix, session=ctx.session)
-            msg = ctx.db_author.translate_phrase("updated_prefix").safe_substitute(new_prefix=prefix)
+            msg = ctx.translate("updated_prefix").safe_substitute(new_prefix=prefix)
 
         except ValueError:
-            msg = ctx.db_author.translate_phrase("invalid_prefix_set").safe_substitute()
+            msg = ctx.translate("invalid_prefix_set").safe_substitute()
 
         await ctx.send(msg)
 
     @set_prefix.error
     async def handle_set_prefix_errors(self, ctx: SkyfixerContext, error):
         if isinstance(error, commands.BadArgument) or isinstance(error, commands.TooManyArguments):
-            msg = ctx.db_author.translate_phrase("no_prefix_provided").safe_substitute()
+            msg = ctx.translate("no_prefix_provided").safe_substitute()
             await ctx.send(msg, delete_after=10)
             await ctx.message.delete(delay=5)
 
@@ -56,7 +56,7 @@ class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
         await ctx.db_server.set_welcome_channel(
             ctx.channel.id, session=ctx.session
         )
-        msg = ctx.db_author.translate_phrase("new_welcome_channel_set").safe_substitute(
+        msg = ctx.translate("new_welcome_channel_set").safe_substitute(
             ctx.channel.mention
         )
         await ctx.send(msg, delete_after=5)
@@ -75,7 +75,7 @@ class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
         await ctx.db_server.set_welcome_channel(
             None, session=ctx.session
         )
-        msg = ctx.db_author.translate_phrase("removed_welcome_channel").safe_substitute()
+        msg = ctx.translate("removed_welcome_channel").safe_substitute()
         await ctx.send(msg, delete_after=5)
         await ctx.message.delete(delay=5)
 
@@ -93,7 +93,7 @@ class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
         await ctx.db_server.set_announcements_channel(
             ctx.channel.id, session=ctx.session
         )
-        msg = ctx.db_author.translate_phrase("new_welcome_channel_set").safe_substitute(
+        msg = ctx.translate("new_welcome_channel_set").safe_substitute(
             ctx.channel.mention
         )
         await (await ctx.send(msg)).delete(delay=10)
@@ -112,7 +112,7 @@ class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
         await ctx.db_server.set_announcements_channel(
             None, session=ctx.session
         )
-        msg = ctx.db_author.translate_phrase("removed_welcome_channel").safe_substitute()
+        msg = ctx.translate("removed_welcome_channel").safe_substitute()
         await ctx.send(msg, delete_after=5)
         await ctx.message.delete(delay=5)
 
@@ -130,7 +130,7 @@ class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
         await ctx.db_server.set_moderation_log_channel(
             ctx.channel.id, session=ctx.session
         )
-        msg = ctx.db_author.translate_phrase("new_moderation_log_channel_set").safe_substitute(
+        msg = ctx.translate("new_moderation_log_channel_set").safe_substitute(
             ctx.channel.mention
         )
         await (await ctx.send(msg)).delete(delay=10)
@@ -149,6 +149,6 @@ class ServerSettingsCommands(SkyfixerCog, name="Server settings commands"):
         await ctx.db_server.set_moderation_log_channel(
             None, session=ctx.session
         )
-        msg = ctx.db_author.translate_phrase("removed_moderation_log_channel").safe_substitute()
+        msg = ctx.translate("removed_moderation_log_channel").safe_substitute()
         await ctx.send(msg, delete_after=5)
         await ctx.message.delete(delay=5)
