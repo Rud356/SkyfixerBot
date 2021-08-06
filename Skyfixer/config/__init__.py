@@ -1,5 +1,5 @@
 import logging
-import pathlib
+
 from argparse import ArgumentParser
 from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
@@ -108,6 +108,7 @@ class SkyfixerLogsConfig(BaseConfig):
         )
         self.logger.setLevel(self.skyfixer_log_level.value)
         self.logger.addHandler(handler)
+        self.logger.addHandler(logging.StreamHandler())
 
 
 class SkyfixerLocalisation(BaseConfig):
@@ -119,7 +120,7 @@ class SkyfixerLocalisation(BaseConfig):
         self.supported_languages_files: List[Path] = []
 
         for lang in self.supported_languages.value:
-            filepath: Path = self.locales_dir.value / f"{lang}.json"
+            filepath: Path = self.locales_dir.value / f"{lang}.yaml"
 
             if not filepath.is_file():
                 raise ValueError(f"{lang} is not a language file in {filepath}")

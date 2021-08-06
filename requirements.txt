@@ -1,6 +1,7 @@
-ConfigFramework~=2.0.8
+ConfigFramework~=2.2.2
 SqlAlchemy~=1.4.9
 discord.py~=1.7.1
 asyncpg~=0.23.0
 aiosqlite~=0.17.0
 alembic~=1.6.5
+PyYAML~=5.4.1

@@ -1,0 +1,101 @@
+hello_world: Hello, wrold!
+ping: Pong!
+coin_flip: You've flipped `$side`
+"coin_side_heads": heads
+"coin_side_tails": tails
+not_enough_args: You didn't passed enough args (minimum is $num)
+bots_choice: "I'm choosing: $words"
+current_time: Now is `$datetime`
+roll_the_dice: You've got $num on a dice!~
+shipping: $shipping and $shipping_with are compatible on $percent%
+new_language_set_successfully: You've set your default language to $language
+invalid_language: You've tried to set invalid language
+language_list: |
+  Here is supported languages:
+  ```$languages```
+hiding_age_mode: Your are $showing_or_hiding your age
+hiding_birthday_mode: Your are $showing_or_hiding your birthday
+invalid_birthday_date: You've provided invalid date. Correct format is "%d.%m.%Y"
+birthday_is_set: Your birthday was set to $birthday
+time_traveller_detected: How did you got here..? Why? Are we in danger?
+users_level: $member_mention got ${level} level
+users_exp: $member_mention got ${level} exp
+updated_prefix: You've updated a prefix to $new_prefix
+invalid_prefix_set: You've tried to set invalid prefix, try again :^(
+only_for_servers: This command can only be used in servers, sorry
+only_for_servers_and_dms: This command can only be used in servers or dms, sorry
+no_permissions: You can not do that, sorry skyfixer... One day you'll be likely able to do that!
+no_prefix_provided: You didn't provided any prefix or supplied too many arguments
+no_language_provided: You didn't supplied any language or gave too many arguments
+no_birthday_provided: You didn't supplied birthday date or gave too many arguments
+birthday_can_be_set_only_in_dms: You must set birthday only in dms
+something_gone_wrong: Sorry, but something had gone wrong and I can not tell what... but my father gonna look into that
+new_welcome_channel_set: New welcome channel has been set as $channel
+removed_welcome_channel: Welcome channel will not receive messages anymore
+new_announcement_channel_set: New announcement channel has been set as $channel
+removed_announcement_channel: Announcement channel will not receive messages anymore
+new_moderation_log_channel_set: New moderation log channel has been set as $channel
+removed_moderation_log_channel: Moderation log channel will not receive messages anymore
+about_me_title: Hi! My name is Skyfixer and it's nice to meet you
+tech_support_here: Tech support link
+facts_about_me_title: Some facts about me
+facts_about_me: |
+  1) I am girl
+  2) I like playing games and watch anime
+  3) I like being chaos and order at the same time
+  4) My name is `$bots_name` and you can find me via $bot_mention
+  5) My current version of OS is $version
+  6) I love purple color
+about_author_title: |
+  [Rud356](https://github.com/Rud356):
+  I like when people use my projects the way they've been meant to be used. So please, if you got a bug or wish to add something - make sure to tell it to me.
+user_info_in_pm_title: Information and settings about you
+user_in_server_title: Information about $user_mention
+basic_info_title: Basic information
+user_info_for_embed: |
+  User name: $username
+  Dev ID: $user_id
+  Created at: $user_created_at
+  Language: $user_language
+users_avatar_info_title: About avatar
+user_avatar_info: |
+  Avatar url: $avatar_url
+  Avatar is animated: $is_avatar_animated
+user_birthday_info_title: About birthday and age
+user_birthday_info: |
+  Birthday date: $birthday_date
+  Age: $users_age
+birthday_unknown: users birthday date is unknown
+age_is_unknown: users age is unknown
+users_settings_title: Your settings
+users_settings: |
+  Hiding age: $is_hiding_age
+  Hiding birthday: $is_hiding_birthday
+users_server_related_title: Server related information
+users_server_related_info: |
+  Server: $server_info
+  Joined at: $joined_at
+  Exp: $exp_amount
+  Level: $level
+  Bans count: $bans_count
+  Kicks count: $kicks_count
+default_ban_reason: $user_who_bans has banned $user_who_is_banned without providing reason
+default_kick_reason: $user_who_kicks has kicked $user_who_is_banned without providing reason
+ban_reason: |
+  $user_who_bans has banned $user_who_is_banned: $reason
+kick_reason: |
+  $user_who_kicks has kicked $user_who_is_kicked: $reason
+ban_success: User $user_to_ban was banned successfully
+kick_success: User $user_to_kick was kicked successfully
+no_user_to_ban_mentioned: User to ban isn't mentioned
+bot_missing_ban_permission: I can not ban users, sorry... can give me permission to?
+no_user_to_kick_mentioned: User to kick isn't mentioned
+user_missing_kick_permission: You can not kick users
+bot_missing_kick_permission: I can not kick users, sorry... can give me permission to?
+user_tries_to_ban_someone_higher: |
+  You can not ban someone who's higher than you :^
+  Did you really thought that it'll work?
+user_tries_to_kick_someone_higher: |
+  You can not kick someone who's higher than you :^
+  You still wanted to try?
+no_text_to_reverse: No text given to reverse

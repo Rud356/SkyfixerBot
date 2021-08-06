@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 class SkyfixerCog(Cog):
     async def cog_command_error(self, ctx: SkyfixerContext, error, ignore_error_handler=False):
-        if hasattr(ctx.command, "error_handler") and not ignore_error_handler:
+        if ctx.command.has_error_handler() and not ignore_error_handler:
             return
 
         if isinstance(error, commands.NoPrivateMessage):

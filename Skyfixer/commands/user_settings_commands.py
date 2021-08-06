@@ -93,7 +93,7 @@ class UserSettingsCommands(SkyfixerCog, name="User settings commands"):
             await ctx.db_author.set_birthday(birthday_date, session=ctx.session)
 
         except ValueError:
-            text = ctx.translate("invali_birthday_date").safe_substitute()
+            text = ctx.translate("invalid_birthday_date").safe_substitute()
 
         except ctx.db_author.exc.NoTimeTravellersAllowed:
             text = ctx.translate("time_traveller_detected").safe_substitute()

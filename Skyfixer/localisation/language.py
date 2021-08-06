@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from json import load
 from pathlib import Path
 from string import Template
 from typing import AnyStr, Dict, Union
+
+import yaml
 
 from Skyfixer.config import logger
 
@@ -12,7 +13,7 @@ class Language:
     __slots__ = ("language_name", "phrases")
 
     def __init__(self, language_name: AnyStr, phrases: Dict[AnyStr, AnyStr]):
-        if len(language_name) > 3:
+        if len(language_name) > 20:
             raise ValueError(f"Too long language name: {language_name}")
 
         self.language_name = language_name
@@ -46,7 +47,7 @@ class Language:
     @classmethod
     def load_from_file(cls, language_name: str, file_path: Union[str, Path]):
         with open(file_path) as f:
-            localisation = load(f)
+            localisation = yaml.safe_load(f)
 
         return cls(language_name, localisation)
 
